@@ -225,5 +225,4 @@ void generate_molecules_from_file(char* filename)
     }
 
     fclose(file);
-    exit(1);
 }
