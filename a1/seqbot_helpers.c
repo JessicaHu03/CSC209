@@ -182,9 +182,8 @@ void generate_molecules_from_file(char* filename)
         printf("Error opening file\n");
         exit(1);
     }
-    while(1){
-        int length;
-        fscanf(file, "%d", &length);
+    int length;
+    while(fscanf(file, "%d", &length) == 1){
         if (length < 0){//length is not a positive number
             printf("INVALID SEQUENCE\n");
             exit(1);
@@ -223,10 +222,8 @@ void generate_molecules_from_file(char* filename)
             exit(1);
         }
 	free(sequence);
-        if (feof(file)){//reach the end of the file
-        break;
-        }
     }
+
     fclose(file);
-    return;
+    exit(1);
 }
