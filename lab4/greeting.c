@@ -37,8 +37,18 @@ int main(int argc, char **argv) {
     char greeting[20];
     char *name = argv[2];
 
-    // Your code goes here
+    strncpy(greeting, argv[1], 20);
+    greeting[20] = '\0';
 
+    if (strlen(argv[1]) > 19){
+        greeting[strlen(argv[1] - 1)] = '\0';
+    } else if (strlen(argv[1]) == 18){
+        greeting[18] = ' ';
+        greeting[19] = '\0';
+    } else {
+        greeting[strlen(argv[1])] = ' ';
+    }
+    strncat(greeting, name, strlen(name) + 1);
 
     printf("%s\n", greeting);
     return 0;
