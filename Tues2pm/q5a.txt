@@ -1,0 +1,37 @@
+Q5: [3 marks] Answer the questions about each of the following code snippets.
+Write your answer beside or below EXPLANATION.
+
+a)
+    char *course;
+    strcpy(course, "CSC209");
+    printf("%s\n", course);
+
+If there is an error, explain what causes the error, referring 
+specifically to the code. If there is no error show what the output is.
+
+EXPLANATION: 
+
+output: CSC209
+
+b)  
+    char course[6];
+    strncpy(course, "CSC209", sizeof(course));
+    printf("%s\n", course);
+
+If there is an error, explain what causes the error, referring 
+specifically to the code. If there is no error show what the output is.
+
+EXPLANATION: 
+1. third argument of strncpy should be strlen(course)+1
+2. did not assign null terminator to course after strnpy
+
+c) 
+    char course[8] = "CSC209 ";
+    strncat(course, "Winter", strlen("Winter") + 1);
+    printf("%s\n", course);
+
+If there is an error, explain what causes the error, referring 
+specifically to the code. If there is no error show what the output is.
+
+EXPLANATION:  
+output: "CSC209Winter"
