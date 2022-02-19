@@ -1,0 +1,272 @@
+Script started on 2022-02-18 21:35:11-0500
+]0;huwanti1@wolf:/h/u14/c0/00/huwanti1/huwanti1/lab6wolf:~/huwanti1/lab6$ exitgdb overflow.clist[Kexitcat gdb_example.txtls[Kcat gdb_example.txtexit[Klistexitlistgdb overflow.c
+GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+"/h/u14/c0/00/huwanti1/huwanti1/lab6/overflow.c": not in executable format: File format not recognized
+(gdb) list []8]
+No symbol table is loaded.  Use the "file" command.
+(gdb) lisr[Kt 8
+No symbol table is loaded.  Use the "file" command.
+(gdb) run
+Starting program:  
+No executable file specified.
+Use the "file" or "exec-file" command.
+(gdb) quit
+]0;huwanti1@wolf:/h/u14/c0/00/huwanti1/huwanti1/lab6wolf:~/huwanti1/lab6$ gdb overflow.c[K[K
+GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from overflow...done.
+(gdb) listr [K[K[Kt 8
+3       #define SIZE 4
+4       #define OVERFLOW 5
+5       
+6       int main() {
+7           int index = 0;
+8           int i;
+9           int before[SIZE] = {10, 10, 10, 10};
+10          int a[SIZE] = {0, 0, 0, 0};
+11          int after[SIZE] = {10, 10, 10, 10};
+12      
+(gdb) break main
+Breakpoint 1 at 0x742: file overflow.c, line 6.
+(gdb) run
+Starting program: /h/u14/c0/00/huwanti1/huwanti1/lab6/overflow 
+
+Breakpoint 1, main () at overflow.c:6
+6       int main() {
+(gdb) continue
+Continuing.
+Address of the variables:
+7fffffffe9b0 -> &after[0]
+7fffffffe9b4 -> &after[1]
+7fffffffe9b8 -> &after[2]
+7fffffffe9bc -> &after[3]
+7fffffffe9a0 -> &a[0]
+7fffffffe9a4 -> &a[1]
+7fffffffe9a8 -> &a[2]
+7fffffffe9ac -> &a[3]
+7fffffffe990 -> &before[0]
+7fffffffe994 -> &before[1]
+7fffffffe998 -> &before[2]
+7fffffffe99c -> &before[3]
+7fffffffe98c -> &i
+7fffffffe988 -> &index
+
+Initial values:
+i = 0
+before = {10, 10, 10, 10}
+a = {0, 0, 0, 0}
+after = {10, 10, 10, 10}
+
+i = 0
+before = {10, 10, 10, 10}
+a = {0, 0, 0, 0}
+after = {10, 10, 10, 10}
+i = 1
+before = {10, 10, 10, 10}
+a = {0, 10, 0, 0}
+after = {10, 10, 10, 10}
+i = 2
+before = {10, 10, 10, 10}
+a = {0, 10, 20, 0}
+after = {10, 10, 10, 10}
+i = 3
+before = {10, 10, 10, 10}
+a = {0, 10, 20, 30}
+after = {10, 10, 10, 10}
+i = 4
+before = {10, 10, 10, 10}
+a = {0, 10, 20, 30}
+after = {40, 10, 10, 10}
+[Inferior 1 (process 50235) exited normally]
+(gdb) list [K[K[K[K[Klist [K[K[K[K[Klist 8
+3       #define SIZE 4
+4       #define OVERFLOW 5
+5       
+6       int main() {
+7           int index = 0;
+8           int i;
+9           int before[SIZE] = {10, 10, 10, 10};
+10          int a[SIZE] = {0, 0, 0, 0};
+11          int after[SIZE] = {10, 10, 10, 10};
+12      
+(gdb) list 10
+5       
+6       int main() {
+7           int index = 0;
+8           int i;
+9           int before[SIZE] = {10, 10, 10, 10};
+10          int a[SIZE] = {0, 0, 0, 0};
+11          int after[SIZE] = {10, 10, 10, 10};
+12      
+13          printf("Address of the variables:\n");
+14          for (index = 0; index < SIZE; index++) {
+(gdb) list 15
+10          int a[SIZE] = {0, 0, 0, 0};
+11          int after[SIZE] = {10, 10, 10, 10};
+12      
+13          printf("Address of the variables:\n");
+14          for (index = 0; index < SIZE; index++) {
+15              printf("%lx -> &after[%d]\n", (unsigned long) &after[index], index);
+16          }
+17          for (index = 0; index < SIZE; index++) {
+18              printf("%lx -> &a[%d]\n", (unsigned long) &a[index], index);
+19          }
+(gdb) list 18
+13          printf("Address of the variables:\n");
+14          for (index = 0; index < SIZE; index++) {
+15              printf("%lx -> &after[%d]\n", (unsigned long) &after[index], index);
+16          }
+17          for (index = 0; index < SIZE; index++) {
+18              printf("%lx -> &a[%d]\n", (unsigned long) &a[index], index);
+19          }
+20          for (index = 0; index < SIZE; index++) {
+21              printf("%lx -> &before[%d]\n", (unsigned long) &before[index], index);
+22          }
+(gdb) lisr[Kt [K[K[K[K[Knext
+The program is not being run.
+(gdb) list 1[K20
+15              printf("%lx -> &after[%d]\n", (unsigned long) &after[index], index);
+16          }
+17          for (index = 0; index < SIZE; index++) {
+18              printf("%lx -> &a[%d]\n", (unsigned long) &a[index], index);
+19          }
+20          for (index = 0; index < SIZE; index++) {
+21              printf("%lx -> &before[%d]\n", (unsigned long) &before[index], index);
+22          }
+23          printf("%lx -> &i\n", (unsigned long)&i);
+24          printf("%lx -> &index\n", (unsigned long)&index);
+(gdb) 李斯特[K[K[Klist 25
+20          for (index = 0; index < SIZE; index++) {
+21              printf("%lx -> &before[%d]\n", (unsigned long) &before[index], index);
+22          }
+23          printf("%lx -> &i\n", (unsigned long)&i);
+24          printf("%lx -> &index\n", (unsigned long)&index);
+25          printf("\n");
+26      
+27      
+28          printf("Initial values:\n");
+29          printf("i = %d\n", i);
+(gdb) list 30
+25          printf("\n");
+26      
+27      
+28          printf("Initial values:\n");
+29          printf("i = %d\n", i);
+30          printf("before = {%d, %d, %d, %d}\n", before[0], before[1], before[2], before[3]);
+31          printf("a = {%d, %d, %d, %d}\n", a[0], a[1], a[2], a[3]);
+32          printf("after = {%d, %d, %d, %d}\n", after[0], after[1], after[2], after[3]);
+33          printf("\n");
+34      
+(gdb) list 35
+30          printf("before = {%d, %d, %d, %d}\n", before[0], before[1], before[2], before[3]);
+31          printf("a = {%d, %d, %d, %d}\n", a[0], a[1], a[2], a[3]);
+32          printf("after = {%d, %d, %d, %d}\n", after[0], after[1], after[2], after[3]);
+33          printf("\n");
+34      
+35      
+36          for (i = 0; i < OVERFLOW; i++) {
+37              a[i] = i * 10;
+38              printf("i = %d\n", i);
+39              printf("before = {%d, %d, %d, %d}\n", before[0], before[1], before[2], before[3]);
+(gdb) list 3[K40
+35      
+36          for (i = 0; i < OVERFLOW; i++) {
+37              a[i] = i * 10;
+38              printf("i = %d\n", i);
+39              printf("before = {%d, %d, %d, %d}\n", before[0], before[1], before[2], before[3]);
+40              printf("a = {%d, %d, %d, %d}\n", a[0], a[1], a[2], a[3]);
+41              printf("after = {%d, %d, %d, %d}\n", after[0], after[1], after[2], after[3]);
+42          }
+43      
+44          return 0;
+(gdb) run
+Starting program: /h/u14/c0/00/huwanti1/huwanti1/lab6/overflow 
+
+Breakpoint 1, main () at overflow.c:6
+6       int main() {
+(gdb) break m[Kli[K[K37
+Breakpoint 2 at 0x555555554965: file overflow.c, line 37.
+(gdb) conti[K[K[K[K[Krun
+The program being debugged has been started already.
+Start it from the beginning? (y or n) c[Ky
+Starting program: /h/u14/c0/00/huwanti1/huwanti1/lab6/overflow 
+
+Breakpoint 1, main () at overflow.c:6
+6       int main() {
+(gdb) continue
+Continuing.
+Address of the variables:
+7fffffffe9b0 -> &after[0]
+7fffffffe9b4 -> &after[1]
+7fffffffe9b8 -> &after[2]
+7fffffffe9bc -> &after[3]
+7fffffffe9a0 -> &a[0]
+7fffffffe9a4 -> &a[1]
+7fffffffe9a8 -> &a[2]
+7fffffffe9ac -> &a[3]
+7fffffffe990 -> &before[0]
+7fffffffe994 -> &before[1]
+7fffffffe998 -> &before[2]
+7fffffffe99c -> &before[3]
+7fffffffe98c -> &i
+7fffffffe988 -> &index
+
+Initial values:
+i = 0
+before = {10, 10, 10, 10}
+a = {0, 0, 0, 0}
+after = {10, 10, 10, 10}
+
+
+Breakpoint 2, main () at overflow.c:37
+37              a[i] = i * 10;
+(gdb) continur[Ke
+Continuing.
+i = 0
+before = {10, 10, 10, 10}
+a = {0, 0, 0, 0}
+after = {10, 10, 10, 10}
+
+Breakpoint 2, main () at overflow.c:37
+37              a[i] = i * 10;
+(gdb) continue[C[C[C[C[C[C[Kprint()")")[C[C[K[K[K[K&af[K[K()a)f)t)e)r)[)])0])
+$1 = (int *) 0x7fffffffe9b0
+(gdb) print&(after[0])[C[1P[0])[1P[0])[1P[0])[1P[0])[C[C[1P])4])
+$2 = (int *) 0x7fffffffe9b0
+(gdb) exit
+Undefined command: "exit".  Try "help".
+(gdb) quit
+A debugging session is active.
+
+        Inferior 1 [process 54256] will be killed.
+
+Quit anyway? (y or n) y
+]0;huwanti1@wolf:/h/u14/c0/00/huwanti1/huwanti1/lab6wolf:~/huwanti1/lab6$ exit
+exit
+
+Script done on 2022-02-18 21:43:39-0500
