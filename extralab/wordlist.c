@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,19 +16,73 @@
  *     compared to the order of the words in the file.
  *   - Do proper error checking of fopen, fclose, fgets
  */
+
 struct node *read_list(char *filename) {
-    // TODO - Remember to update return statement
-    return NULL;
+    FILE *fp = fopen(filename, "r");
+    if (fp == NULL){
+        printf("Error opening file\n");
+        exit(1);
+    }
+    struct node *head = malloc(sizeof(struct node));
+    if (head == NULL){
+        printf("unable to allocate memory");
+        exit(1);
+    }
+    char word[6];
+    struct node *temp;
+
+    temp = head; //create linked list and link to head
+
+    while (fscanf(fp, "%s", word) == 1){
+        struct node *newNode = malloc(sizeof(struct node));
+
+        /* If memory is not allocated for newNode */
+        if(newNode == NULL)
+        {
+            printf("Unable to allocate memory.");
+            break;
+        }
+
+	strncpy(newNode->word, word, 6);
+        newNode->word[6] = '\0';; // Link data field of newNode
+        newNode->next = NULL; // Make sure new node points to NULL 
+
+        temp->next = newNode; // Link previous node with newNode
+        temp = temp->next;    // Make current node as previous node
+    }
+    fclose(fp);
+    return head;
 }
 
 /* Print the words in the linked-list list one per line
  */
 void print_dictionary(struct node *list) {
-    // TODO
+        if (list == NULL){
+        printf("List is empty.\n");
+        return;
+    }
+    struct node *temp;
+    temp = list;
+    while (temp != NULL){
+        printf("%s\n", temp->word);
+        temp = temp->next;
+    }
 }
 /* Free all of the dynamically allocated memory in the dictionary list 
  */
 void free_dictionary(struct node *list) {
-    // TODO
+    if (list == NULL){
+        printf("List is empty.\n");
+        return;
+    }
+
+    struct node *temp;
+    struct node *nextNode;
+    temp = list;
+    while (temp != NULL){
+        nextNode = temp->next;
+        free(temp);
+        temp = nextNode;
+    }
 }
 
