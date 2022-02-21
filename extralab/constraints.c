@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,7 +11,13 @@
  * Return a pointer to the newly created constraints struct.
  */
 struct constraints *init_constraints() {
-    // TODO - Remember to update return statement
+    struct constraints *c = malloc(sizeof(struct constraints));
+    for (int i =0; i < WORDLEN; i++){
+	strcat((c->must_be)[i], "");
+    }
+    for(int i=0; i<ALPHABET_SIZE; i++){
+        (c->cannot_be)[i] = 0;
+    }
     return c;
 }
 
@@ -22,8 +29,9 @@ struct constraints *init_constraints() {
 void set_green(char letter, int index, struct constraints *con) {
     assert(islower(letter));
     assert(index >= 0 && index < SIZE);
-    
-    // TODO
+    char str[2] = "\0";
+    str[0] = letter;
+    strcat((con->must_be)[index], str);
 }
 
 /* Update "con" by adding the possible letters to the string at the must_be 
@@ -47,7 +55,28 @@ void set_yellow(int index, char *cur_tiles, char *next_tiles,
     assert(strlen(next_tiles) == WORDLEN);
     assert(strlen(word) == WORDLEN);
 
-    // TODO
+    char str[2];
+    str[1]= "\0";
+    str[0] = letter;
+    strcat((con->must_be)[index], str);
+
+    for(int i=0; i < WORDLEN; i++){
+        int asmp = 1;
+        if(i != index && ((next_tiles)[i] == 'g' || next_tiles[i] == 'y') && cur_tiles[i] != 'g'){
+            for (int j=0; j<WORDLEN; j++){
+                if (word[i] == word[j]){
+                         asmp =0;           
+                }
+
+            }
+            if (asmp){
+                str[0] = word[i];
+                strcat((con->must_be)[index], str);
+            }
+        }
+    }
+
+
 }
 
 /* Add the letters from cur_word to the cannot_be field.
@@ -56,17 +85,32 @@ void set_yellow(int index, char *cur_tiles, char *next_tiles,
 void add_to_cannot_be(char *cur_word, struct constraints *con) {
     assert(strlen(cur_word) <= WORDLEN);
 
-    // TODO
+    for (int i=; i<strlen(cur_word); i++){
+        char curr_c = cur_word[i];
+        (con->cannot_be)[ c - 'a'] = 1;
+    }
 }
 
 void print_constraints(struct constraints *c) {
     printf("cannot_be: ");
 
-    // TODO
+    for (int i=0; i<ALPHABET_SIZE; i++){
+        if ((c->cannot_be)[i] == 1){
+            printf("%c", i + 'a');
+        }
+    }
     
     printf("\nmust_be\n");
 
-    // TODO
+    for (int j=0; j<WORDLEN; j++){
+        printf("%d: ", j);
+        char cc[] = c->must_be)[j];
+        for (int k=0; k<strlen(cc); k++){
+            printf("%c", cc[k]);
+        }
+        printf("\n");
+    }
 
     printf("\n");
 }
+
